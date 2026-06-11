@@ -2,8 +2,7 @@
 
 A raw tool-calling triage agent for Arabic-language e-commerce customer
 support, built with FastAPI, SQLAlchemy/PostgreSQL, and the OpenRouter API
-(Qwen / DeepSeek / Llama). No agent frameworks (LangGraph, LlamaIndex,
-CrewAI, AutoGen, SmolAgents) are used.
+(Qwen ). 
 
 ## Architecture
 
