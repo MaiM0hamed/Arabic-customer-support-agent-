@@ -1,0 +1,57 @@
+[
+  {
+    "order_id": "ORD-1001",
+    "customer_id": "CUST-001",
+    "status": "shipped",
+    "items": [{"name": "سماعات لاسلكية", "qty": 1, "price": 199.0}],
+    "total_amount": 199.0,
+    "currency": "SAR",
+    "tracking_number": "TRK-55421",
+    "created_at": "2026-05-28T10:00:00",
+    "expected_delivery_date": "2026-06-03T00:00:00"
+  },
+  {
+    "order_id": "ORD-1002",
+    "customer_id": "CUST-002",
+    "status": "delivered",
+    "items": [{"name": "حذاء رياضي", "qty": 1, "price": 350.0}],
+    "total_amount": 350.0,
+    "currency": "SAR",
+    "tracking_number": "TRK-55422",
+    "created_at": "2026-05-20T14:30:00",
+    "expected_delivery_date": "2026-05-25T00:00:00"
+  },
+  {
+    "order_id": "ORD-1003",
+    "customer_id": "CUST-003",
+    "status": "processing",
+    "items": [{"name": "هاتف ذكي", "qty": 1, "price": 2200.0}],
+    "total_amount": 2200.0,
+    "currency": "SAR",
+    "tracking_number": null,
+    "created_at": "2026-06-08T09:15:00",
+    "expected_delivery_date": "2026-06-13T00:00:00"
+  },
+  {
+    "order_id": "ORD-1004",
+    "customer_id": "CUST-004",
+    "status": "delayed",
+    "items": [{"name": "جهاز لوحي", "qty": 1, "price": 1500.0}],
+    "total_amount": 1500.0,
+    "currency": "SAR",
+    "tracking_number": "TRK-55424",
+    "created_at": "2026-05-25T11:00:00",
+    "expected_delivery_date": "2026-06-01T00:00:00"
+  },
+  {
+    "order_id": "ORD-1005",
+    "customer_id": "CUST-005",
+    "status": "cancelled",
+    "items": [{"name": "ساعة ذكية", "qty": 1, "price": 899.0}],
+    "total_amount": 899.0,
+    "currency": "SAR",
+    "tracking_number": null,
+    "created_at": "2026-05-15T08:45:00",
+    "expected_delivery_date": null
+  }
+]

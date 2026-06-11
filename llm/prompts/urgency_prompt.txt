@@ -1,0 +1,11 @@
+قيّم مدى إلحاح رسالة العميل التالية بناءً على المحتوى والمشاعر والنية المكتشفة.
+المستويات الممكنة فقط: low, medium, high, critical.
+
+رسالة العميل:
+"{message}"
+
+النية: {intent}
+المشاعر: {sentiment}
+
+أرجع كائن JSON فقط بالشكل التالي:
+{{"urgency": "<one_of_the_levels>", "reason": "<short reason in Arabic>"}}

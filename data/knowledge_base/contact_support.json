@@ -1,0 +1,6 @@
+{
+  "documents": [
+    {"id": "contact_001", "title_ar": "التواصل مع موظف بشري", "content_ar": "يمكنك طلب التحدث مع موظف دعم بشري مباشرة، وسيقوم النظام بتحويل طلبك إلى الفريق المختص في أقرب وقت ممكن.", "tags": ["contact_support_request", "complaint"]},
+    {"id": "contact_002", "title_ar": "أوقات عمل الدعم", "content_ar": "يعمل فريق الدعم على مدار الأسبوع من الساعة 9 صباحًا حتى 12 منتصف الليل بتوقيت السعودية.", "tags": ["general_inquiry", "contact_support_request"]}
+  ]
+}

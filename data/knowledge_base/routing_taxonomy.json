@@ -1,0 +1,29 @@
+{
+  "teams": [
+    {"id": "logistics", "label_ar": "فريق اللوجستيات والشحن"},
+    {"id": "payments", "label_ar": "فريق المدفوعات والفوترة"},
+    {"id": "returns_refunds", "label_ar": "فريق الإرجاع والاسترداد"},
+    {"id": "technical_support", "label_ar": "فريق الدعم التقني"},
+    {"id": "account_support", "label_ar": "فريق دعم الحسابات"},
+    {"id": "customer_care", "label_ar": "فريق رعاية العملاء"},
+    {"id": "escalations_management", "label_ar": "فريق إدارة التصعيدات"}
+  ],
+  "intent_routing": {
+    "order_status": "logistics",
+    "shipping_delay": "logistics",
+    "refund_request": "returns_refunds",
+    "return_request": "returns_refunds",
+    "exchange_request": "returns_refunds",
+    "damaged_product": "returns_refunds",
+    "payment_issue": "payments",
+    "app_bug": "technical_support",
+    "account_help": "account_support",
+    "general_inquiry": "customer_care",
+    "complaint": "customer_care",
+    "contact_support_request": "customer_care"
+  },
+  "urgency_overrides": {
+    "critical": "escalations_management",
+    "high": "escalations_management"
+  }
+}

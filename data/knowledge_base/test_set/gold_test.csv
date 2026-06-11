@@ -1,0 +1,11 @@
+id,message,customer_id,expected_intent,expected_team,expected_dialect
+case_001,وين طلبي رقم ORD-1001؟ ما وصلني لحد الحين,CUST-001,order_status,logistics,msa
+case_002,طلبي ORD-1004 متأخر كثير وما وصل، الموعد كان قبل أسبوع,CUST-004,shipping_delay,logistics,msa
+case_003,عايز أرجع المنتج اللي وصلني، مش عاجبني المقاس,CUST-002,return_request,returns_refunds,egyptian
+case_004,وصلني الجهاز مكسور من الصندوق، أبغى استبداله فورًا,CUST-004,damaged_product,returns_refunds,gulf
+case_005,تم خصم المبلغ مرتين من بطاقتي على نفس الطلب، أبغى استرداد المبلغ الزائد,CUST-003,payment_issue,payments,gulf
+case_006,التطبيق بيقفل لوحده كل ما أفتح صفحة طلباتي,CUST-002,app_bug,technical_support,egyptian
+case_007,نسيت كلمة المرور ومش قادر أدخل على حسابي,CUST-005,account_help,account_support,msa
+case_008,بدي أعرف شو هي طرق الدفع المتاحة عندكم,CUST-001,general_inquiry,customer_care,levantine
+case_009,أنا مستاء جدًا من الخدمة وأبغى أتكلم مع موظف بشري حالًا,CUST-003,contact_support_request,customer_care,gulf
+case_010,أبغى أسترد فلوسي كاملة لأن الطلب اتلغى من عندكم,CUST-005,refund_request,returns_refunds,gulf

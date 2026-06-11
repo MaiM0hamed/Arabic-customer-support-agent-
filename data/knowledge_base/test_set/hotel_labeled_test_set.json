@@ -1,0 +1,917 @@
+[
+  {
+    "id": "hotel_001",
+    "message": "جيد جداً. القرب من الحرم ونظافة المكان وحسن معاملة موظفي الاستقبال.",
+    "customer_id": "CUST-HARD-0327",
+    "expected_intent": "general_inquiry",
+    "expected_team": "customer_care",
+    "expected_dialect": "msa",
+    "expected_urgency": "low",
+    "expected_sentiment": "positive",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_002",
+    "message": "جيد جداً. الفندق جميل وفخم الغرف جميلة ومريحة الجو العام رائع. موظفة الاستقبال",
+    "customer_id": "CUST-HARD-0160",
+    "expected_intent": "general_inquiry",
+    "expected_team": "customer_care",
+    "expected_dialect": "msa",
+    "expected_urgency": "low",
+    "expected_sentiment": "positive",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_003",
+    "message": "“الفندق مميز من جميع النواحي”. الفندق مميز من جميع النواحي انصح بشدة. للسكن فيه وخصوصا للعائلات ،الغرف مريحة وخدمة ممتازة من طاقم العاملين بالفندق واشكر الاخت مها مسؤلة خدمة العملاء على حسن تعاملها معنا واتمنى لها التوفيق /شيخة النعيمي من مملكة البحرين.",
+    "customer_id": "CUST-HARD-0498",
+    "expected_intent": "general_inquiry",
+    "expected_team": "customer_care",
+    "expected_dialect": "msa",
+    "expected_urgency": "low",
+    "expected_sentiment": "positive",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_004",
+    "message": "“أقامه طيبة”. الافطار غير لذيذ ولايتوفر مطاعم عربية مناسبة.",
+    "customer_id": "CUST-HARD-0473",
+    "expected_intent": "complaint",
+    "expected_team": "customer_care",
+    "expected_dialect": "msa",
+    "expected_urgency": "low",
+    "expected_sentiment": "neutral",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_005",
+    "message": "“ممتاز”. كل شيء.",
+    "customer_id": "CUST-HARD-0349",
+    "expected_intent": "general_inquiry",
+    "expected_team": "customer_care",
+    "expected_dialect": "msa",
+    "expected_urgency": "low",
+    "expected_sentiment": "positive",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_006",
+    "message": "جيد. . اضاءة الغرفة ضعيفة",
+    "customer_id": "CUST-HARD-0206",
+    "expected_intent": "complaint",
+    "expected_team": "customer_care",
+    "expected_dialect": "msa",
+    "expected_urgency": "low",
+    "expected_sentiment": "neutral",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_007",
+    "message": "جيد. . المطبخ صغير جداً لايوجد غسالة",
+    "customer_id": "CUST-HARD-0037",
+    "expected_intent": "complaint",
+    "expected_team": "customer_care",
+    "expected_dialect": "msa",
+    "expected_urgency": "low",
+    "expected_sentiment": "neutral",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_008",
+    "message": "“رائعه”. النظافة.",
+    "customer_id": "CUST-HARD-0082",
+    "expected_intent": "general_inquiry",
+    "expected_team": "customer_care",
+    "expected_dialect": "msa",
+    "expected_urgency": "low",
+    "expected_sentiment": "positive",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_009",
+    "message": "جيد جداً. التعامل الموقع قريب من عملي. يحتاج اهتمام بمستوى النظافة",
+    "customer_id": "CUST-HARD-0221",
+    "expected_intent": "complaint",
+    "expected_team": "customer_care",
+    "expected_dialect": "msa",
+    "expected_urgency": "low",
+    "expected_sentiment": "neutral",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_010",
+    "message": "“ممتاز لمن يبحث عن الفخامة”. كل شي رائع في الفندق والطاقم ودود جدا وراقي أنصح فيه من يريد السفر مع زوجتة للسكن في مكان محترم. بصراحة لا يوجد",
+    "customer_id": "CUST-HARD-0012",
+    "expected_intent": "general_inquiry",
+    "expected_team": "customer_care",
+    "expected_dialect": "msa",
+    "expected_urgency": "low",
+    "expected_sentiment": "positive",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_011",
+    "message": "مخيب للأمل. الفطور ممتاز المصاعد متوفره. تعامل الاستقبال غير جيد عند وصولنا لم يكن حجرنا موجود بسبب اخطاء موظف في الفندق",
+    "customer_id": "CUST-HARD-0145",
+    "expected_intent": "complaint",
+    "expected_team": "customer_care",
+    "expected_dialect": "msa",
+    "expected_urgency": "medium",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_012",
+    "message": "“المكان فخم ولكن حرام يظلم بسوء العاملين الغير مدربين .”. . الخدمه بطيئه جدا جدا جدا، لا يوجد ماء ساخن في دورات المياه الماء بارد جدا، المخدات غير مريحه بالمره",
+    "customer_id": "CUST-HARD-0004",
+    "expected_intent": "complaint",
+    "expected_team": "customer_care",
+    "expected_dialect": "msa",
+    "expected_urgency": "medium",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_013",
+    "message": "مخيب للأمل. لا. تعامل العاملين في قسم الحجز",
+    "customer_id": "CUST-HARD-0126",
+    "expected_intent": "complaint",
+    "expected_team": "customer_care",
+    "expected_dialect": "msa",
+    "expected_urgency": "medium",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_014",
+    "message": "“فاشل”. لا شيء سوا الموقع. لم تكن غرفي جاهزة عندما وصلت و المفروض انها جاهزة . انا حاجز غرفتين ثلاثية . اعطوني غرفة ثلاثية و الثانية ثنائية مؤقت الى ان تجهز ذهبت للحرم و عدت بعد 4 ساعات و لم تجهز الغرفة قالوا بجهزوها العصر قلت لهم خلص اليوم و انا محسوب عليي ثلاثيةو انا ماشي اليوم اللي بعده الفجر اعطوني الثنائية و نزلوا لي السعر قال انت اجز بوكنغ ما نقدر نغير السعر . العصر شفت العامل بنفس الطابق كلمته قال لي هذه مكيفها خربان كيف انظفها . نزلت لهم و تهاوشت معاهم لانهم كذبوا علي و لا في فايدة لا اعطوني غرفة و لا نزلوا السعرو بالنسبة للفطور كان فطور فاشل جدا يبدأ الساعة 7 - 10 رحت الساعة 7:30لا يوجد حليب كلمتهم جابوا حليب بعد ربع ساعة و كان باردو الأكل غير متنوع ابدا اشياء مالها علاقة بالفطور.",
+    "customer_id": "CUST-HARD-0190",
+    "expected_intent": "complaint",
+    "expected_team": "escalations_management",
+    "expected_dialect": "gulf",
+    "expected_urgency": "high",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_015",
+    "message": "“لن اعود اليه مره اخرى”. موقعه. اثاث الفندق القديم مستواه مو عالي",
+    "customer_id": "CUST-HARD-0156",
+    "expected_intent": "complaint",
+    "expected_team": "customer_care",
+    "expected_dialect": "gulf",
+    "expected_urgency": "medium",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_016",
+    "message": "“نظيف ومرتب وضعيف نت”. نحتاج بار ماكولات خفيفه. النت بطئي ومحدود ارجو ان يكون سريع ومفتوح للجميع",
+    "customer_id": "CUST-HARD-0446",
+    "expected_intent": "app_bug",
+    "expected_team": "technical_support",
+    "expected_dialect": "msa",
+    "expected_urgency": "medium",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_017",
+    "message": "ضعيف جداً. . اقسم بالله سوف اقول الحقيقه للفائده للجميعالفندق كا اطلاله رائع ..الفندق كطاقم عمل سيء جداعند الوصول .. كنت حاجز غرفة مطله على البحر اطلاله كامله .. فقلوا لي انت حاجز اطلاله جزئيه واخذ وشد وعندما قمت باعطائهم رقم الحجز وصوره من الحجز المطل من بوكنق تراجعوا على مضض واعطوني مطله رغم اني دافع حق مطله والجزئي اقل سعرالعمال لا يخدمونك في شيل الاغراض والابتسامه تكاد مفقوده من الطاقم رغم انه لا يوجد زحمهضريبه المدينة ركزوا عليها فيها استغلال من الفندق يجيك السعر النهائي في الغرفه ولا يقولك ان فيه ضريبه للشرطه على كلامهم 20 درهم لكل ليلهالتامين لديهم يستغلونه في الثلاجه ويقولون انك ماخذ وانت ما خذت شي ثم يقولون نشيلها اذا صرت مصر وصادقبالأمانه الفندق موقعه حلو بس ضروري تغيير الطاقم ومدير الفندق حتى يرتقي للافضل",
+    "customer_id": "CUST-HARD-0476",
+    "expected_intent": "payment_issue",
+    "expected_team": "escalations_management",
+    "expected_dialect": "gulf",
+    "expected_urgency": "high",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_018",
+    "message": "مخيب للأمل. لا شيء. الغرفه لم يتم تنظيفها بشكل جيد",
+    "customer_id": "CUST-HARD-0125",
+    "expected_intent": "complaint",
+    "expected_team": "customer_care",
+    "expected_dialect": "msa",
+    "expected_urgency": "medium",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_019",
+    "message": "ضعيف جداً. ليس هناك مصداقيه بين الفندق والبكنق. المطعم",
+    "customer_id": "CUST-HARD-0412",
+    "expected_intent": "complaint",
+    "expected_team": "escalations_management",
+    "expected_dialect": "msa",
+    "expected_urgency": "high",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_020",
+    "message": "مخيب للأمل. لاشيء. طاقم الاستقبال",
+    "customer_id": "CUST-HARD-0250",
+    "expected_intent": "complaint",
+    "expected_team": "customer_care",
+    "expected_dialect": "msa",
+    "expected_urgency": "medium",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_021",
+    "message": "مخيب للأمل. الديكور فقط. مراتب السرير سيئة جداً وغير مريحةعدم وجود مخدات في الفندق عندما طلبتعدم وجود فرش اضافيةرائحة الحمام كريههعدم التجاوب من الاستقبال للطلبات والتأخر في الرد عليكالواي فاي سيئالاستغلال في اسعار الاصناف الموجوده في الثلاجه بتدبيل الاسعار واكثرالنور يدخل الغرفه والستارة الموجودة لاتعزل النور الداخل من الشباك مما يسبب ازعاج في النومالروائح التي يستخدمونها في الغرف سيئة جداً جداًبصراحة فندق سيئ ولن اسكنه مره اخرى",
+    "customer_id": "CUST-HARD-0008",
+    "expected_intent": "complaint",
+    "expected_team": "customer_care",
+    "expected_dialect": "msa",
+    "expected_urgency": "medium",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_022",
+    "message": "“ممتاز”. قريب جدا من الحرم النظافة و الاهتمام و المقابل المالي مواقف السيارات الانترنت مجاني. الافطار سعرها مرتفع جدا عدم توفر ميني بار في الغرفه",
+    "customer_id": "CUST-HARD-0198",
+    "expected_intent": "payment_issue",
+    "expected_team": "payments",
+    "expected_dialect": "msa",
+    "expected_urgency": "low",
+    "expected_sentiment": "positive",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_023",
+    "message": "“لم يعجبني”. الافطار والتكييف. الواي فاي لايوجد بالغرف(يوجد بالاستقبال فقط)فتري الناس رجال ونساء في الاستقبال من اجل الواي فاي- الخدمات باليل ضعيفه جدا ( خدمة الغرف)- طاقم الاستقبال غير جيد",
+    "customer_id": "CUST-HARD-0132",
+    "expected_intent": "app_bug",
+    "expected_team": "technical_support",
+    "expected_dialect": "msa",
+    "expected_urgency": "medium",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_024",
+    "message": "“فخامة”. نظافة الفندق ، سرعة التجاوب من العاملين ، قربه من محطة الميترو داماك العقارية وقربه من ممشى المارينا و مارينا مول، حمال الحقائب هنري كان متعاونا جدا، النادي الصحي جميل، المسبح والجاكوزي مقبول نوعا ما.. عند استلام الغرفة لم يكن المكيف باردا، وتم تغيير الغرفة في دقائق ولكن للاسف ايضا لم يكن المكيف بالبرودة المطلووبة في الغرفة الجديدة ، شبكة الواي فاي سريعة ولكن ضعيفة الاشارة في الغرف، تسريب المياه من باب الشاور وقت الاستحمام ، يوجد بعض الروائح في الحمام عند استخدامه حيث لابد من تغيير ماء كرسي الحمام عدة مرات حتى تزول الرائحة ( تصريف المجاري ليس جيدا) ، الانتظار طويلا حتي ياتي المصعد مع انه يوجد ستة. رائحة العطررالمستخدم في مدخل الفندق واللوبي والمصاعد ليست جيدة، بصراحة",
+    "customer_id": "CUST-HARD-0257",
+    "expected_intent": "app_bug",
+    "expected_team": "technical_support",
+    "expected_dialect": "msa",
+    "expected_urgency": "low",
+    "expected_sentiment": "neutral",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_025",
+    "message": "استثنائي. الهدوء والعزل مابين الغرف. الانترنت سيء وظعيف",
+    "customer_id": "CUST-HARD-0073",
+    "expected_intent": "app_bug",
+    "expected_team": "technical_support",
+    "expected_dialect": "msa",
+    "expected_urgency": "low",
+    "expected_sentiment": "positive",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_026",
+    "message": "جيد. الفندق مريح واجوائه عائليهموقع الفندق جيد ايضاايضا الاطلاله بالمساء رائعه للفندق من ناحية شارع الشيخ زايدحامل الشنط الموظف منصور جداً محترم ومتعاون ويخدم بطيب نفس. الاستقبال كان مخربط بس في موظفه وحده ونفسيتها ماش وتاخرت عشرين دقيقه او اكثر عشان بس تجهز اوراقي وتدخلني للسويتوالانترنت بفلوس مع ان باقي الفنادق ببلاش واسعار النت مبالغ فيها بس لاني حجزت عن طريق بوكينق باضافة النت ف كانت بالبدايه صعوبه بس بعد ساعتين انحلت المشكلهايضا رائحة الاستقبال كأنها رائحة مستشفىلازم تدفع تأمين عشان تستخدم التليفون حق الفندق طيب بكلم واذا بسوي شيك اوت بدفع لكم قالوا لا لازم تدفع بالاول تامين",
+    "customer_id": "CUST-HARD-0355",
+    "expected_intent": "payment_issue",
+    "expected_team": "payments",
+    "expected_dialect": "gulf",
+    "expected_urgency": "low",
+    "expected_sentiment": "positive",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_027",
+    "message": "رائع. موقع الفندق، سعرالفندق ، بوفيه الافطار ، النظافه ، خدمة المواقف ، سرعة تخليص الزبون في القدوم والمغادرة. الانترنت (غير مهم بالنسبة لي )",
+    "customer_id": "CUST-HARD-0389",
+    "expected_intent": "general_inquiry",
+    "expected_team": "customer_care",
+    "expected_dialect": "msa",
+    "expected_urgency": "low",
+    "expected_sentiment": "positive",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_028",
+    "message": "مخيب للأمل. الموقع جميل جدا .. الواي فاي وبعض الروائح والاستجابه المتاخره في كل شي",
+    "customer_id": "CUST-HARD-0283",
+    "expected_intent": "complaint",
+    "expected_team": "customer_care",
+    "expected_dialect": "msa",
+    "expected_urgency": "medium",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_029",
+    "message": "“سيّء جداً جداً جداً”. لا شي يذكر أبداً. سيّء لدرجه انه لا يصلح للاستخدام البشري لا يوجد خصوصية ،،كانت الغرفه جنب الاستقبال بدون مفتاح مجرد غرفة النوم فيها مفتاح واذا ابغا الحمام الله يكرمكم خارج الغرفه والمغسلة يشاركون فيها عمال الاستقبال ،، غيرنا الغرفه مقابل زياده ماليه برضو كان سيّء ،، يعني مليان صراصير والمغسلة جنب السرير مما اضطرينا الخروج منهااحنا حجزناه لقربه من الجامعه وعلى أساس بس وقت النوم لكن طلع سيّء و مريب بنفس الوقت",
+    "customer_id": "CUST-HARD-0256",
+    "expected_intent": "damaged_product",
+    "expected_team": "escalations_management",
+    "expected_dialect": "gulf",
+    "expected_urgency": "high",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_030",
+    "message": "“لايستحق قيمة الأجار”. لاشيء. الواي فاي عطلانازعاج الاستقبال خلال الخروج مع اني مستأجر 10 ايام ولم اتجاوز الساعة 3 الأثاث قديم وغير نظيفلايوجد توصيل للسوبر ماركت مع انها من الخدمات المذكورة لديهمالإفطار محددود وغير جيد",
+    "customer_id": "CUST-HARD-0177",
+    "expected_intent": "damaged_product",
+    "expected_team": "returns_refunds",
+    "expected_dialect": "msa",
+    "expected_urgency": "medium",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_031",
+    "message": "“فندق جميل وهادئ”. الاستقابا جميل واللوبي رائع  وحجم الغرف والشقه جميل. رائحة الممرات الكريهه والحشرات داخل الشقق",
+    "customer_id": "CUST-HARD-0005",
+    "expected_intent": "damaged_product",
+    "expected_team": "escalations_management",
+    "expected_dialect": "msa",
+    "expected_urgency": "high",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_032",
+    "message": "ضعيف جداً. المكان متهالك وحرام الفلوس اللي اندفعت فيه. كل شي سئ",
+    "customer_id": "CUST-HARD-0049",
+    "expected_intent": "damaged_product",
+    "expected_team": "escalations_management",
+    "expected_dialect": "msa",
+    "expected_urgency": "high",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_033",
+    "message": "ضعيف جداً. لم يعجبني اي شيءلاانصح به. من اسوء الفنادق لا خدمة  ولا نظافة وحشرات في الغرفولا موقع وسعره غالي  ولايستحق",
+    "customer_id": "CUST-HARD-0276",
+    "expected_intent": "damaged_product",
+    "expected_team": "escalations_management",
+    "expected_dialect": "msa",
+    "expected_urgency": "high",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_034",
+    "message": "“ذكرى زواجي”. شاطئ البحر . البركه. الافطار. موكيت الغرفة وسخ.",
+    "customer_id": "CUST-HARD-0490",
+    "expected_intent": "complaint",
+    "expected_team": "customer_care",
+    "expected_dialect": "msa",
+    "expected_urgency": "low",
+    "expected_sentiment": "positive",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_035",
+    "message": "مخيب للأمل. لاشئ. ١-الاهتمام بالنظافة ضعيف جداً ٢-الحشرات تملأ المكان٣-بحاجة للترميم وإعادة تأهيل",
+    "customer_id": "CUST-HARD-0262",
+    "expected_intent": "damaged_product",
+    "expected_team": "escalations_management",
+    "expected_dialect": "msa",
+    "expected_urgency": "high",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_036",
+    "message": "“غير مريحة وغير صحية”. الخدمة جيدة وسريعة. الحجز غير موافق للاتفاقالفرش قديم جداالمكان غير صحيالعديد من الحشرات (النمل) في غرفة النومالسعر أعلى من قيمة المكانيجب تحديث وصيانة الفندق بشكل كامل مع تغيير الاثاث",
+    "customer_id": "CUST-HARD-0158",
+    "expected_intent": "damaged_product",
+    "expected_team": "escalations_management",
+    "expected_dialect": "msa",
+    "expected_urgency": "high",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_037",
+    "message": "“مكان رائع”. كل شي رائع بالفندق ويصلح الاسترخاء ومن أجمل الفنادق اللي زرتها. السعر بمطعم الحضيرة جدا مبالغ فيه ولا أعتقد أن هناك شي يميز هذا المطعم",
+    "customer_id": "CUST-HARD-0382",
+    "expected_intent": "payment_issue",
+    "expected_team": "payments",
+    "expected_dialect": "msa",
+    "expected_urgency": "low",
+    "expected_sentiment": "positive",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_038",
+    "message": "“فندق يستحق الاقامة فيه”. شكل الفندق وموقعه  وتوفر مواقف السيارات... عموما الفندق جيد ويستحق الاقامة فيه.... وقت الاستقبال ووقت الخروج... صادفت نفس الموظف/ سيد وهو بنغالي على ماعتقد ، لم ارتح له خصوصاً انه اخرني كثيراً في الدخول رغم اتصالي بالفندق قبل الوصول ووعد بان تكون الغرفة جاهزة ولكن تاخر في تسليمي اياها... وفي الخروج رغم تأكيدي بعمل اوراق الخروج وطلبت منه عمل اللازم الا انه تباطأ بشكل جعلني اخرج عن طوري واتصلت بالمدير وابديت له انزعاجي من المعاملة التي لقيتها من هذا الشخص ، وطلبت شخص اخر لعمل الخروج ...",
+    "customer_id": "CUST-HARD-0208",
+    "expected_intent": "contact_support_request",
+    "expected_team": "customer_care",
+    "expected_dialect": "msa",
+    "expected_urgency": "medium",
+    "expected_sentiment": "neutral",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_039",
+    "message": "“السعر مرتفع مقابل الخدمات”. طاقم العمل. النظافة ورائحة الغرفة كانت سيئة",
+    "customer_id": "CUST-HARD-0376",
+    "expected_intent": "payment_issue",
+    "expected_team": "payments",
+    "expected_dialect": "msa",
+    "expected_urgency": "medium",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_040",
+    "message": "“ليلة زواج جميله ولكن الفندق افسد هذه الليله”. . تعامل سيئ تأخير في الدخول وعند الخروج موظف الليل يحدد وقت للخروج وموظف الصباح يطلب الخروج بوقت اخر بالرغم من التاخر في الدخول ،، سحب المبلغ مباشرة دون فتح القفل عن البطاقه الائئتمانية وبالتالي تم خصم مبلغ الحجز اضافة الى حجز مبلغ اخر بنفس القيمه اي الخصم اصبح مرتين والى الان لم تسترتجع النقود الى رصيد البطاقه تعامل سئ من موظفين الاستقبال لحل هذه المشكله لن اعيد هذه الزياره مرة اخرى",
+    "customer_id": "CUST-HARD-0420",
+    "expected_intent": "payment_issue",
+    "expected_team": "escalations_management",
+    "expected_dialect": "msa",
+    "expected_urgency": "high",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_041",
+    "message": "ممتاز. . سعر بوفيه الافطار مبالغ فيه",
+    "customer_id": "CUST-HARD-0493",
+    "expected_intent": "payment_issue",
+    "expected_team": "payments",
+    "expected_dialect": "msa",
+    "expected_urgency": "low",
+    "expected_sentiment": "positive",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_042",
+    "message": "“لا انصح”. لا شئ. خدمة الاستقبال دخول الغرف 17:00الفندق قديم جداً السعر مبالغ فيه",
+    "customer_id": "CUST-HARD-0149",
+    "expected_intent": "payment_issue",
+    "expected_team": "payments",
+    "expected_dialect": "msa",
+    "expected_urgency": "medium",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_043",
+    "message": "جيد. الموقع والنظافه فقط. ازعاج الغرف المجاوره ومسؤلي النظافة الاسرة صغيره جداً لم يتم ارجاع مبلغ التأمين حتى الان علما بأنه تم سحب المبلغ قبل شهر !!",
+    "customer_id": "CUST-HARD-0344",
+    "expected_intent": "refund_request",
+    "expected_team": "escalations_management",
+    "expected_dialect": "msa",
+    "expected_urgency": "high",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_044",
+    "message": "ضعيف. الموقع جيد. - لخبطة الفندق (تسجيل أكثر من غرفة بإسمي وأنا لم أحجز سوى غرفة واحدة)- تسجيل الدخول الساعة 6 مساءً وهذا الشيء غير مذكور في موقع الحجز (وإذا تبي تسجل دخولك وتستلم الغرفة قبل 6 مساءً تقوم بترقية الغرفة أو دفع مبلغ إضافي)- ضعف مستوى النضافة- الانتضار الطويل",
+    "customer_id": "CUST-HARD-0099",
+    "expected_intent": "payment_issue",
+    "expected_team": "payments",
+    "expected_dialect": "msa",
+    "expected_urgency": "medium",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_045",
+    "message": "“أسوء تجربة إقامة لي في دبي”. . فندق ضعيف بكل المقاييس ومن المحبط أن نرى مثل هذا الفندق في شارع الشيخ زايد فالأمر غير مقبول نهائيآ 1. النظافة سيئة جدآ 2. قد تتعرض سيارتك الثمينه للضرر بسبب سوء المواقف المخصصة وسوء قيادة الموظفين الغير مبالين 3. موقع مدخل الفندق غير لائق نهائيآ بسبب وجوده خلف محطة المترو ومدخله الغريب 4. قلة جودة الأكل المقدم والتأخير في تلبية الطلبات 5. أول مشكلة واجهتها عدم جودة الغرفة مما أجبرني للنزول للأستقبال لعمل إجراءات المغادرة وذلك بعد وصولي بـ5 دقائق 6. الموظفين غير ودودين وغير لائقين كموظفين حدمات فندقية في مدينة كدبي وأستغرب من عدم أتخاذ الدائرة الإقتصادية لأي إجراءات لمثل هذه السلوكيات",
+    "customer_id": "CUST-HARD-0148",
+    "expected_intent": "complaint",
+    "expected_team": "escalations_management",
+    "expected_dialect": "msa",
+    "expected_urgency": "high",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_046",
+    "message": "رائع. الغرفه كانت مطله على برج خليفة. لم يتم تغير مناشف و وفوط الحمام بعد تنظيف الغرفه والمشكله الثانيه خدمة صف السيارات التأخير في استلام وتسليم السياره",
+    "customer_id": "CUST-HARD-0395",
+    "expected_intent": "shipping_delay",
+    "expected_team": "logistics",
+    "expected_dialect": "msa",
+    "expected_urgency": "low",
+    "expected_sentiment": "positive",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_047",
+    "message": "ضعيف. لم يعجبني شيء. سوء الاستقبال والتأخر في اجراءات الدخول والخروج لاكثر من ساعة",
+    "customer_id": "CUST-HARD-0466",
+    "expected_intent": "shipping_delay",
+    "expected_team": "logistics",
+    "expected_dialect": "msa",
+    "expected_urgency": "medium",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_048",
+    "message": "“فندق مخيب للآمل لايرتقي لخمس نجوم أبدا”. توفر المواقف وقربه من المسجد للرجال فقط. كان وقت دخولي الساعة الرابعة عصرا وقمت بالإتصال بالفندق الساعة العشرة صباحا لكي أأكد وقت دخولي تفاجأت عند حضوري الساعة الرابعة بعد انتظار طويل ليقول لي مدير الاستقبال غرفتك غير جاهزة مع العلم ان الساعة الخامسة وكان هناك تكدس كبير من النزلاء لتسجيل الدخول ولايوجد الا ثلاثة موظفين استقبال بطيئين جدا ولم استطع استلام غرفتي الا بعد الاتصال بخدمة عملاء بوكينق مشكورين كذلك وقت الخروج انتظرت قرابة الساعة حتى يصل الي عامل الحقائب بالاضافة لالتهاب جلد طفلتي بسبب سوء النظافة فندق مخيب للآمال",
+    "customer_id": "CUST-HARD-0260",
+    "expected_intent": "shipping_delay",
+    "expected_team": "escalations_management",
+    "expected_dialect": "msa",
+    "expected_urgency": "high",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_049",
+    "message": "“جيد جدا”. عجبتني الاطلاله على البحر و المسبح جيد و السونا والبخار و الموظف الموجود على المسبح مبستم دائما ويراقب الاطفال اثناء انشغال الاهل وقت السباحه. انقطاع الماء مما ادى لتأخري لأداء الصلاه و وجود اعمال صيانه امام باب الغرفه",
+    "customer_id": "CUST-HARD-0296",
+    "expected_intent": "app_bug",
+    "expected_team": "technical_support",
+    "expected_dialect": "msa",
+    "expected_urgency": "medium",
+    "expected_sentiment": "neutral",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_050",
+    "message": "“فندق دايخ”. رخيص وموقع بعيد هادئ يحتاج سيارة. الخدمة تعبانة جداً هناك فوضى في ادارة الفندق والدخول والخروج يتأخر ولا يتم الرد على اتصالاتي من الغرفة!!!",
+    "customer_id": "CUST-HARD-0431",
+    "expected_intent": "shipping_delay",
+    "expected_team": "escalations_management",
+    "expected_dialect": "egyptian",
+    "expected_urgency": "high",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_051",
+    "message": "“رائع”. كل شي وخاصه النظافه وسرعه تسجيل الدخول والخروج.",
+    "customer_id": "CUST-HARD-0067",
+    "expected_intent": "general_inquiry",
+    "expected_team": "customer_care",
+    "expected_dialect": "msa",
+    "expected_urgency": "low",
+    "expected_sentiment": "positive",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_052",
+    "message": "ضعيف. . قمنا بتسجيل الدخول الساعه ١٠ مساء والاستقبال سيء وتعاملهم سيء وقامو بتسليم غرفه والاخرى رفضو بحجة الزحمهولم يرجعو لي المبلغ الا بعد الاتصال ببوكيج شكرا بوكينج على خدماتكم الرائعه",
+    "customer_id": "CUST-HARD-0297",
+    "expected_intent": "refund_request",
+    "expected_team": "escalations_management",
+    "expected_dialect": "msa",
+    "expected_urgency": "high",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_053",
+    "message": "جيد جداً. الفندق رائع. عدد موظفي الاستقبال قليل  لم يكن هناك سوى ٢ حيث انتظرت قرابة ٤٠ دقيقة لتسجيل الدخول",
+    "customer_id": "CUST-HARD-0305",
+    "expected_intent": "shipping_delay",
+    "expected_team": "logistics",
+    "expected_dialect": "msa",
+    "expected_urgency": "low",
+    "expected_sentiment": "positive",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_054",
+    "message": "“محمد الرياض”. لم يعجبني شئ. إدارة فاشلة وموظفين استقبال اقل من مستوى فندق نجمتين خصوصاً الموظف السعودي محمد حيث اني حجزت ليلة زواجي عن طريق البوكينج وعند الحضور قالوا لي بكل وقاحه لايوجد غرفة علماً انهم حجزو المبلغ اضافه الى ان الغرفه لاتستحق المبلغ لا انصح بهذا الفندق",
+    "customer_id": "CUST-HARD-0365",
+    "expected_intent": "refund_request",
+    "expected_team": "escalations_management",
+    "expected_dialect": "msa",
+    "expected_urgency": "high",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_055",
+    "message": "ضعيف جداً. . وصلت الساعه ١ والدخول المفترض الساعه ٣ ولم يدخلوني الا الساعه ٤ ونص بعذر الغرفه لم تجهز وبدون اي تعويض ومعامله سيئه من قبل المديره",
+    "customer_id": "CUST-HARD-0194",
+    "expected_intent": "shipping_delay",
+    "expected_team": "escalations_management",
+    "expected_dialect": "msa",
+    "expected_urgency": "high",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_056",
+    "message": "“سكن سيء للغاية”. فقط قربه من الحرم فقط فقط فقط وخرجت منه اليوم التالي ولولا وصولي ليلا ولم أستطع الحصول على سكن لما بت فيه. السكن جدا جدا قذر وسيء وهو مبنى للايواء فقط بدون مراعاة للنزلاء وتفوح رائحة التدخين في جميع الارجاء بسبب سوء الإدارة وعدم احترام النظام",
+    "customer_id": "CUST-HARD-0072",
+    "expected_intent": "complaint",
+    "expected_team": "escalations_management",
+    "expected_dialect": "msa",
+    "expected_urgency": "high",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_057",
+    "message": "مخيب للأمل. الموقع. -التأخير الطويل في تسجيل الدخول والخروج.-المعاملة السيئة من قبل طاقم العمل.-الفندق شبه ليلي يحصل عراك داخل الفندق.-بسبب تأخري ساعة بعد انتهاء مدة اقامتي حسبو علي 150 درهم تكلفة اضافية دون ابلاغي بذلك الامر من البداية بان هناك تكلفة نظير التأخير، وكذلك عدم",
+    "customer_id": "CUST-HARD-0170",
+    "expected_intent": "payment_issue",
+    "expected_team": "escalations_management",
+    "expected_dialect": "msa",
+    "expected_urgency": "high",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_058",
+    "message": "“جيد جدا”. النظافة - البشاشة - سرعة التجاوب. اعمال انشائية مقاربة للفندق تسبب قليلا من الإزعاج ، لكن طاقم العمل متفهم جدا ، لذا استجابوا سريعا لتغيير الغرفة",
+    "customer_id": "CUST-HARD-0027",
+    "expected_intent": "exchange_request",
+    "expected_team": "returns_refunds",
+    "expected_dialect": "msa",
+    "expected_urgency": "low",
+    "expected_sentiment": "positive",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_059",
+    "message": "“لا انصح به”. النظافة لا باس بها. تجربتي كانت سيئة جدا المسبح تفاجأت انه يفتح بعد الظهر ويغلق الساعة 5 عصرا ، طيب لمن اخلص دوامي ومع زحمة الرياض وارغب بالاستجمام في المسبح فلا يمكنني ذلك بسبب المواعيد الغريبة لفتح واغلاق المسبح ، كانت فيه مشكلة في غرفتي انه السقف تنزل منه مياة ، اتصلت على الاستقبال ولم يجيب أحد لفترة طويلة للأسف لا يجلسون على موقع الاستقبال ، ثم بعد اتصالات مستمرة رد علي عامل هندي وحضر للغرفة وشاف المشكلة وقال لي ارجع لك ولم يرجع للأسف ، طلبت منه تغيير الغرفة لأنه المياة مشكلة ولن استخدام العرفة بالشكل هذا ، ولم يستجيل لي ، مما جعل تجربتي سيئة بالفعل ولا عودة لها الفندق",
+    "customer_id": "CUST-HARD-0042",
+    "expected_intent": "exchange_request",
+    "expected_team": "escalations_management",
+    "expected_dialect": "msa",
+    "expected_urgency": "high",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_060",
+    "message": "ضعيف جداً. لا شيء. انا لم أقم بالفندق وارجوا ارجااع المبلغ الذي تم سحبه من بطاقتي الائتمانية وهوثمن اقامة لم اقيم لديكم ولم يتم حجزي وهذا ثقتي بكوبون ان اضع رقم بطاقتي بحيث لا يتم السحب!!! انا لا ارضى لهذا النصب اذا لم يتم ارجاع المبلغ ارجوا تعويضي بأقامة لديكم بهذا المبلغ الذي تم سحبه",
+    "customer_id": "CUST-HARD-0491",
+    "expected_intent": "refund_request",
+    "expected_team": "escalations_management",
+    "expected_dialect": "msa",
+    "expected_urgency": "critical",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  },
+  {
+    "id": "hotel_061",
+    "message": "“لا انصح العوائل”. لا يوجد. غير متعاونين ولا انصح العوائل لأنهم غير متعاونين معهم بتوفير أسرة للأطفال وذلك بعد الحجز ولأنه تم دفع قيمه الغرفه ولايمكن استرداده وكان طلبي قبل الحضور ب48 ساعه ولم اسكت فيه.",
+    "customer_id": "CUST-HARD-0199",
+    "expected_intent": "refund_request",
+    "expected_team": "escalations_management",
+    "expected_dialect": "msa",
+    "expected_urgency": "high",
+    "expected_sentiment": "negative",
+    "expected_entities": {
+      "order_ids": [],
+      "phone_numbers": [],
+      "emails": []
+    }
+  }
+]

@@ -1,0 +1,7 @@
+حدد اللهجة العربية المستخدمة في النص التالي. اختر واحدة فقط من: msa, egyptian, gulf, levantine, maghrebi.
+
+النص:
+"{message}"
+
+أرجع كائن JSON فقط بالشكل التالي:
+{{"dialect": "<one_of_the_options>", "confidence": <float between 0 and 1>}}

@@ -1,0 +1,7 @@
+[
+  {"id": "adv_001", "message": "", "description": "رسالة فارغة", "expected_behavior": "graceful_handling"},
+  {"id": "adv_002", "message": "أبغى ألغي طلبي وأرجع فلوسي وكمان عندي مشكلة بالتطبيق ما يفتح وحسابي مقفول!!", "description": "نوايا متعددة في رسالة واحدة", "expected_behavior": "select_dominant_intent"},
+  {"id": "adv_003", "message": "asdkjqwe 123 !!! ###", "description": "نص عشوائي غير مفهوم", "expected_behavior": "fallback_to_general_inquiry"},
+  {"id": "adv_004", "message": "لو ما تحلولي مشكلتي الحين بروح أسوي بلاغ وأرفع قضية عليكم!!", "description": "رسالة غاضبة جدًا تتطلب تصعيد فوري", "expected_behavior": "high_urgency_escalation"},
+  {"id": "adv_005", "message": "Order ORD-9999 status please, my email is test@example.com and phone 0501234567", "description": "رسالة بالإنجليزية مع بيانات شخصية ورقم طلب غير موجود", "expected_behavior": "handle_pii_and_unknown_order"}
+]

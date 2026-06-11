@@ -1,0 +1,12 @@
+[
+  {"id": "case_001", "message": "وين طلبي رقم ORD-1001؟ ما وصلني لحد الحين", "customer_id": "CUST-001", "expected_intent": "order_status", "expected_team": "logistics", "expected_dialect": "msa"},
+  {"id": "case_002", "message": "طلبي ORD-1004 متأخر كثير وما وصل، الموعد كان قبل أسبوع", "customer_id": "CUST-004", "expected_intent": "shipping_delay", "expected_team": "logistics", "expected_dialect": "msa"},
+  {"id": "case_003", "message": "عايز أرجع المنتج اللي وصلني، مش عاجبني المقاس", "customer_id": "CUST-002", "expected_intent": "return_request", "expected_team": "returns_refunds", "expected_dialect": "egyptian"},
+  {"id": "case_004", "message": "وصلني الجهاز مكسور من الصندوق، أبغى استبداله فورًا", "customer_id": "CUST-004", "expected_intent": "damaged_product", "expected_team": "returns_refunds", "expected_dialect": "gulf"},
+  {"id": "case_005", "message": "تم خصم المبلغ مرتين من بطاقتي على نفس الطلب، أبغى استرداد المبلغ الزائد", "customer_id": "CUST-003", "expected_intent": "payment_issue", "expected_team": "payments", "expected_dialect": "gulf"},
+  {"id": "case_006", "message": "التطبيق بيقفل لوحده كل ما أفتح صفحة طلباتي", "customer_id": "CUST-002", "expected_intent": "app_bug", "expected_team": "technical_support", "expected_dialect": "egyptian"},
+  {"id": "case_007", "message": "نسيت كلمة المرور ومش قادر أدخل على حسابي", "customer_id": "CUST-005", "expected_intent": "account_help", "expected_team": "account_support", "expected_dialect": "msa"},
+  {"id": "case_008", "message": "بدي أعرف شو هي طرق الدفع المتاحة عندكم", "customer_id": "CUST-001", "expected_intent": "general_inquiry", "expected_team": "customer_care", "expected_dialect": "levantine"},
+  {"id": "case_009", "message": "أنا مستاء جدًا من الخدمة وأبغى أتكلم مع موظف بشري حالًا", "customer_id": "CUST-003", "expected_intent": "contact_support_request", "expected_team": "customer_care", "expected_dialect": "gulf"},
+  {"id": "case_010", "message": "أبغى أسترد فلوسي كاملة لأن الطلب اتلغى من عندكم", "customer_id": "CUST-005", "expected_intent": "refund_request", "expected_team": "returns_refunds", "expected_dialect": "gulf"}
+]
