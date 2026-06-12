@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
     openrouter_api_key: str = ""
-    openrouter_model: str = "qwen/qwen3-14b:free"
+    openrouter_model: str = "openai/gpt-oss-120b:free"
     openrouter_base_url: str = "https://openrouter.ai/api/v1"
 
     database_url: str = "postgresql+psycopg://postgres:12345@localhost:5432/arabic_support"
