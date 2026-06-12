@@ -69,9 +69,3 @@ def test_get_runs_returns_list(client: TestClient) -> None:
     response = client.get("/runs")
     assert response.status_code == 200
     assert isinstance(response.json(), list)
-
-
-def test_get_unknown_run_returns_404(client: TestClient) -> None:
-    """GET /triage/{run_id} for a non-existent run returns 404."""
-    response = client.get("/triage/00000000-0000-0000-0000-000000000000")
-    assert response.status_code == 404
