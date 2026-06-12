@@ -16,6 +16,7 @@ _PRICE_TABLE: dict[str, tuple[float, float]] = {
     "qwen/qwen-2.5-72b-instruct": (0.00035, 0.0004),
     "qwen/qwen3-14b": (0.00006, 0.00024),
     "qwen/qwen3-14b:free": (0.0, 0.0),
+    "openai/gpt-oss-120b:free": (0.0, 0.0),
     "deepseek/deepseek-chat": (0.00014, 0.00028),
     "meta-llama/llama-3.1-70b-instruct": (0.0004, 0.0004),
 }
@@ -152,6 +153,23 @@ class OpenRouterClient:
                 self.total_cost_usd += self._estimate_cost(
                     payload["model"], prompt_tokens, completion_tokens
                 )
+
+                # Some free-tier models occasionally return a 200 response
+                # with an empty `content` (the model spends its whole
+                # completion budget on hidden reasoning tokens). For
+                # structured-output calls this is unusable, so treat it as
+                # a transient failure and retry like a network error.
+                if response_format is not None and response_format.get("type") == "json_object":
+                    content = ((data.get("choices") or [{}])[0].get("message") or {}).get("content") or ""
+                    if not content.strip():
+                        last_error = OpenRouterError("Model returned empty content for a JSON response.")
+                        logger.warning(
+                            "Empty content for json_object response (attempt %s/%s)", attempt, self.max_retries
+                        )
+                        if attempt < self.max_retries:
+                            time.sleep(min(2 ** attempt, 8))
+                            continue
+
                 return data
             except (httpx.HTTPError, json.JSONDecodeError) as exc:
                 last_error = exc
