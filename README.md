@@ -23,6 +23,59 @@ data/               # orders, knowledge base, taxonomies, test sets
 tests/              # pytest unit/integration tests
 ```
 
+## System Design
+
+```mermaid
+flowchart LR
+    Client[Client] -->|X-API-Key| API[FastAPI App]
+    API --> Orchestrator[Triage Orchestrator]
+    Orchestrator --> LLM[OpenRouter LLM]
+    Orchestrator --> DB[(PostgreSQL)]
+    Orchestrator --> KB[(Knowledge Base / Orders JSON)]
+    API --> Logs[(JSONL Trajectories)]
+```
+
+## Triage Pipeline
+
+```mermaid
+flowchart TD
+    A[Customer Message] --> B[Sanitize]
+    B --> C[Detect Dialect]
+    C --> D[Extract Entities]
+    D --> E[Analyze Sentiment]
+    E --> F{Parallel}
+    F --> G[Classify Intent]
+    F --> H[Lookup Order]
+    F --> I[Search KB]
+    G --> J[Assess Urgency]
+    H --> J
+    I --> J
+    J --> K[Route Team]
+    K --> L[Draft Response]
+    L --> M{Requires Human?}
+    M -->|Yes| N[Escalate]
+    M -->|No| O[Return Result]
+    N --> O
+```
+
+## Request Flow
+
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant A as FastAPI
+    participant O as Orchestrator
+    participant DB as PostgreSQL
+    participant L as Trajectory Log
+
+    C->>A: POST /triage
+    A->>O: run(message, customer_id)
+    O-->>A: TriageResponse
+    A->>DB: persist_triage_run
+    A->>L: write_trajectory
+    A-->>C: TriageResponse
+```
+
 ## Setup (WSL Ubuntu + Conda)
 
 ```bash
