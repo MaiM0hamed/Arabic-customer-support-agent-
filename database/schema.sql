@@ -44,3 +44,18 @@ CREATE TABLE IF NOT EXISTS triage_runs (
 CREATE INDEX IF NOT EXISTS idx_triage_runs_customer_id ON triage_runs (customer_id);
 CREATE INDEX IF NOT EXISTS idx_triage_runs_created_at ON triage_runs (created_at);
 CREATE INDEX IF NOT EXISTS idx_triage_runs_intent ON triage_runs (intent);
+
+CREATE TABLE IF NOT EXISTS escalations (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    triage_run_id UUID NOT NULL,
+    customer_id VARCHAR(64) NOT NULL,
+    intent VARCHAR(64) NOT NULL,
+    priority VARCHAR(16) NOT NULL,
+    reason TEXT NOT NULL DEFAULT '',
+    status VARCHAR(16) NOT NULL DEFAULT 'open',
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_escalations_triage_run_id ON escalations (triage_run_id);
+CREATE INDEX IF NOT EXISTS idx_escalations_customer_id ON escalations (customer_id);
+CREATE INDEX IF NOT EXISTS idx_escalations_status ON escalations (status);

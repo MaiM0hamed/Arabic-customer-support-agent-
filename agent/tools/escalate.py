@@ -1,6 +1,6 @@
 """Escalation tool: produces a structured escalation record for human review."""
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any
 
 
@@ -26,5 +26,5 @@ def escalate_to_human(reason: str, priority: str, customer_id: str = "", intent:
         "priority": normalized_priority,
         "customer_id": customer_id,
         "intent": intent,
-        "created_at": datetime.utcnow().isoformat(),
+        "created_at": datetime.now(timezone.utc).isoformat(),
     }

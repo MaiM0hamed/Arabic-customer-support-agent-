@@ -32,6 +32,8 @@ def _load_taxonomy() -> list[dict]:
 _TAXONOMY = _load_taxonomy()
 _VALID_INTENT_IDS = {intent["id"] for intent in _TAXONOMY} or {"general_inquiry"}
 _DEFAULT_INTENT = "general_inquiry"
+_PROMPT_TEMPLATE = Path("llm/prompts/classify_intent.txt").read_text(encoding="utf-8")
+_SYSTEM_PROMPT = Path("llm/prompts/system_prompt.txt").read_text(encoding="utf-8")
 
 
 def _keyword_fallback(text: str) -> tuple[str, float]:
@@ -79,13 +81,14 @@ def classify_intent(text: str, llm_client: OpenRouterClient | None = None) -> tu
 
     if llm_client is not None:
         try:
-            prompt_path = Path("llm/prompts/classify_intent.txt")
-            template = prompt_path.read_text(encoding="utf-8")
             intents_str = "\n".join(f"- {i['id']}: {i['label_ar']}" for i in _TAXONOMY)
-            prompt = template.format(intents=intents_str, message=text)
+            prompt = _PROMPT_TEMPLATE.format(intents=intents_str, message=text)
 
             response = llm_client.chat_completion(
-                messages=[{"role": "user", "content": prompt}],
+                messages=[
+                    {"role": "system", "content": _SYSTEM_PROMPT},
+                    {"role": "user", "content": prompt},
+                ],
                 response_format={"type": "json_object"},
                 temperature=0.0,
             )

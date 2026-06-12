@@ -25,6 +25,36 @@ _FALLBACK_RESPONSES: dict[str, str] = {
 
 _DEFAULT_FALLBACK = "شكرًا لتواصلك معنا، تم استلام رسالتك وسيتم الرد عليك في أقرب وقت ممكن."
 
+# Per-dialect instructions injected into the response prompt so the reply's
+# register matches the customer's dialect instead of defaulting to MSA.
+_DIALECT_GUIDANCE: dict[str, str] = {
+    "msa": "اكتب الرد بالعربية الفصحى المبسطة (الفصحى المعاصرة) المستخدمة عادة في رسائل خدمة العملاء الرسمية.",
+    "egyptian": (
+        "اكتب الرد باللهجة المصرية العامية المهذبة، باستخدام كلمات وتعبيرات مصرية شائعة "
+        "(مثل: حضرتك، تمام، هنقوم بكذا، عشان، علشان، هنتواصل معك) مع الحفاظ على الاحترافية. "
+        "لا تستخدم الفصحى الرسمية."
+    ),
+    "gulf": (
+        "اكتب الرد باللهجة الخليجية المهذبة، باستخدام كلمات وتعبيرات خليجية شائعة "
+        "(مثل: نسعد بخدمتك، إن شاء الله، أبشر، تراني بتابع معك، حياك الله) مع الحفاظ على الاحترافية. "
+        "لا تستخدم الفصحى الرسمية."
+    ),
+    "levantine": (
+        "اكتب الرد باللهجة الشامية (الشام) المهذبة، باستخدام كلمات وتعبيرات شامية شائعة "
+        "(مثل: تمام، هلق، رح نتابع معك، منيح، إن شاء الله) مع الحفاظ على الاحترافية. "
+        "لا تستخدم الفصحى الرسمية."
+    ),
+    "maghrebi": (
+        "اكتب الرد باللهجة المغربية المهذبة، باستخدام كلمات وتعبيرات مغربية شائعة "
+        "(مثل: غادي نتابعو معاك، دابا، بغيتي، إن شاء الله) مع الحفاظ على الاحترافية. "
+        "لا تستخدم الفصحى الرسمية."
+    ),
+}
+_DEFAULT_DIALECT_GUIDANCE = _DIALECT_GUIDANCE["msa"]
+
+_PROMPT_TEMPLATE = Path("llm/prompts/response_prompt.txt").read_text(encoding="utf-8")
+_SYSTEM_PROMPT = Path("llm/prompts/system_prompt.txt").read_text(encoding="utf-8")
+
 
 def draft_response(
     message: str,
@@ -57,25 +87,27 @@ def draft_response(
         return fallback
 
     try:
-        prompt_path = Path("llm/prompts/response_prompt.txt")
-        template = prompt_path.read_text(encoding="utf-8")
         context_str = "\n".join(f"- {doc.get('content_ar', '')}" for doc in (context or []))
 
-        prompt = template.format(
+        prompt = _PROMPT_TEMPLATE.format(
             dialect=dialect,
+            dialect_instruction=_DIALECT_GUIDANCE.get(dialect, _DEFAULT_DIALECT_GUIDANCE),
             intent=intent,
             context=context_str or "لا يوجد سياق إضافي.",
             message=message,
         )
 
         response = llm_client.chat_completion(
-            messages=[{"role": "user", "content": prompt}],
+            messages=[
+                {"role": "system", "content": _SYSTEM_PROMPT},
+                {"role": "user", "content": prompt},
+            ],
             response_format={"type": "json_object"},
             temperature=0.4,
         )
         result = llm_client.extract_json(response)
-        reply = result.get("response_ar", "").strip()
+        reply = str(result.get("response_ar") or "").strip()
         return reply or fallback
-    except (OpenRouterError, OSError, KeyError) as exc:
+    except (OpenRouterError, OSError, KeyError, AttributeError) as exc:
         logger.warning("LLM response drafting failed: %s", exc)
         return fallback

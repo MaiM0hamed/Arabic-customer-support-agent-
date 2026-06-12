@@ -46,3 +46,21 @@ def lookup_order(order_id: str) -> dict[str, Any] | None:
     except SQLAlchemyError as exc:
         logger.error("Order lookup failed for '%s': %s", order_id, exc)
         return None
+
+
+def lookup_orders(order_ids: list[str]) -> list[dict[str, Any]]:
+    """Look up multiple orders by their identifiers.
+
+    Args:
+        order_ids: A list of order identifiers (e.g. `["ORD-1001", "ORD-1002"]`).
+
+    Returns:
+        list[dict[str, Any]]: The found orders, in the same order as
+            `order_ids`. Order ids that are not found are skipped.
+    """
+    orders = []
+    for order_id in order_ids:
+        order = lookup_order(order_id)
+        if order is not None:
+            orders.append(order)
+    return orders

@@ -2,7 +2,7 @@
 
 import json
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 from config import settings
@@ -63,7 +63,7 @@ def seed_orders() -> int:
                 total_amount=order_data["total_amount"],
                 currency=order_data.get("currency", "SAR"),
                 tracking_number=order_data.get("tracking_number"),
-                created_at=_parse_datetime(order_data.get("created_at")) or datetime.utcnow(),
+                created_at=_parse_datetime(order_data.get("created_at")) or datetime.now(timezone.utc),
                 expected_delivery_date=_parse_datetime(order_data.get("expected_delivery_date")),
             )
             session.add(order)

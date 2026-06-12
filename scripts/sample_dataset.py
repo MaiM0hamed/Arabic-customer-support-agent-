@@ -9,26 +9,39 @@ from config import settings
 
 logger = logging.getLogger(__name__)
 
-_LABELED_PATH = Path(settings.knowledge_base_dir) / "test_set" / "labeled_test_set.json"
-_OUTPUT_PATH = Path(settings.knowledge_base_dir) / "test_set" / "gold_test.csv"
+_TEST_SET_DIR = Path(settings.knowledge_base_dir) / "test_set"
+_LABELED_PATHS = [
+    _TEST_SET_DIR / "labeled_test_set.json",
+    _TEST_SET_DIR / "hotel_labeled_test_set.json",
+]
+_OUTPUT_PATH = _TEST_SET_DIR / "gold_test.csv"
 
 _FIELDNAMES = ["id", "message", "customer_id", "expected_intent", "expected_team", "expected_dialect"]
 
 
 def build_gold_test_csv() -> int:
-    """Convert the labeled JSON test set into a CSV gold test file.
+    """Convert the labeled JSON test sets into a single CSV gold test file.
+
+    Merges every file in `_LABELED_PATHS` that exists on disk so both the
+    hand-written gold cases and the hotel-review-derived gold cases are
+    included in the evaluation run.
 
     Returns:
         int: The number of rows written to `gold_test.csv`.
 
     Raises:
-        FileNotFoundError: If `labeled_test_set.json` does not exist.
+        FileNotFoundError: If none of `_LABELED_PATHS` exist.
     """
-    if not _LABELED_PATH.exists():
-        raise FileNotFoundError(f"Labeled test set not found: {_LABELED_PATH}")
+    cases: list[dict] = []
+    for path in _LABELED_PATHS:
+        if not path.exists():
+            logger.warning("Labeled test set not found, skipping: %s", path)
+            continue
+        with open(path, encoding="utf-8") as handle:
+            cases.extend(json.load(handle))
 
-    with open(_LABELED_PATH, encoding="utf-8") as handle:
-        cases = json.load(handle)
+    if not cases:
+        raise FileNotFoundError(f"No labeled test sets found in {_LABELED_PATHS}")
 
     _OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(_OUTPUT_PATH, "w", encoding="utf-8", newline="") as handle:

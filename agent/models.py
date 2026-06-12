@@ -1,6 +1,6 @@
 """Pydantic models shared across the agent and API layers."""
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any
 from uuid import UUID
 
@@ -10,8 +10,8 @@ from pydantic import BaseModel, Field
 class TriageRequest(BaseModel):
     """Incoming request payload for the `/triage` endpoint."""
 
-    message: str = Field(..., min_length=0, description="Raw customer message text.")
-    customer_id: str = Field(..., min_length=1, description="Unique customer identifier.")
+    message: str = Field(..., min_length=0, max_length=2000, description="Raw customer message text.")
+    customer_id: str = Field(..., min_length=1, max_length=64, description="Unique customer identifier.")
 
 
 class Entities(BaseModel):
@@ -63,4 +63,4 @@ class HealthResponse(BaseModel):
     """Response payload for the `/health` endpoint."""
 
     status: str = "ok"
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

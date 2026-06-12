@@ -1,11 +1,16 @@
-"""SQLAlchemy ORM models for orders and triage runs."""
+"""SQLAlchemy ORM models for orders, triage runs, and escalations."""
 
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 
-from sqlalchemy import ARRAY, JSON, Boolean, DateTime, Float, Integer, String
+from sqlalchemy import ARRAY, Boolean, DateTime, Float, Integer, String
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+
+
+def _utcnow() -> datetime:
+    """Return the current time as a timezone-aware UTC datetime."""
+    return datetime.now(timezone.utc)
 
 
 class Base(DeclarativeBase):
@@ -24,7 +29,7 @@ class Order(Base):
     total_amount: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
     currency: Mapped[str] = mapped_column(String(8), nullable=False, default="SAR")
     tracking_number: Mapped[str | None] = mapped_column(String(64), nullable=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_utcnow)
     expected_delivery_date: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
 
 
@@ -54,4 +59,20 @@ class TriageRun(Base):
     latency_ms: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     est_cost_usd: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
 
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, index=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_utcnow, index=True)
+
+
+class Escalation(Base):
+    """Represents a case escalated to a human agent for follow-up."""
+
+    __tablename__ = "escalations"
+
+    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    triage_run_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), index=True, nullable=False)
+    customer_id: Mapped[str] = mapped_column(String(64), index=True, nullable=False)
+    intent: Mapped[str] = mapped_column(String(64), nullable=False)
+    priority: Mapped[str] = mapped_column(String(16), nullable=False)
+    reason: Mapped[str] = mapped_column(String, nullable=False, default="")
+    status: Mapped[str] = mapped_column(String(16), nullable=False, default="open")
+
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_utcnow, index=True)

@@ -1,0 +1,196 @@
+{
+  "run_id": "dd1b6de2-a093-4ea2-a888-c45d201469b3",
+  "customer_id": "CUST-001",
+  "message": "وين طلبي رقم ORD-1001؟ ما وصلني لحد الحين",
+  "reasoning_trace": [
+    {
+      "step": 1,
+      "tool": "sanitizer",
+      "input": {
+        "message": "وين طلبي رقم ORD-1001؟ ما وصلني لحد الحين"
+      },
+      "output": {
+        "clean_message": "وين طلبي رقم ORD-1001؟ ما وصلني لحد الحين"
+      },
+      "latency_ms": 0
+    },
+    {
+      "step": 2,
+      "tool": "detect_dialect",
+      "input": {
+        "text": "وين طلبي رقم ORD-1001؟ ما وصلني لحد الحين"
+      },
+      "output": {
+        "dialect": "msa"
+      },
+      "latency_ms": 0
+    },
+    {
+      "step": 3,
+      "tool": "extract_entities",
+      "input": {
+        "text": "وين طلبي رقم ORD-1001؟ ما وصلني لحد الحين"
+      },
+      "output": {
+        "order_ids": [
+          "ORD-1001"
+        ],
+        "phone_numbers": [],
+        "emails": []
+      },
+      "latency_ms": 0
+    },
+    {
+      "step": 4,
+      "tool": "analyze_sentiment",
+      "input": {
+        "text": "وين طلبي رقم ORD-1001؟ ما وصلني لحد الحين"
+      },
+      "output": {
+        "sentiment": "neutral",
+        "score": 0.0
+      },
+      "latency_ms": 0
+    },
+    {
+      "step": 5,
+      "tool": "classify_intent",
+      "input": {
+        "text": "وين طلبي رقم ORD-1001؟ ما وصلني لحد الحين"
+      },
+      "output": {
+        "intent": "order_status",
+        "confidence": 0.95
+      },
+      "latency_ms": 9970
+    },
+    {
+      "step": 6,
+      "tool": "lookup_order",
+      "input": {
+        "order_ids": [
+          "ORD-1001"
+        ]
+      },
+      "output": {
+        "orders": [
+          {
+            "order_id": "ORD-1001",
+            "customer_id": "CUST-001",
+            "status": "shipped",
+            "items": [
+              {
+                "qty": 1,
+                "name": "سماعات لاسلكية",
+                "price": 199.0
+              }
+            ],
+            "total_amount": 199.0,
+            "currency": "SAR",
+            "tracking_number": "TRK-55421",
+            "created_at": "2026-05-28T10:00:00",
+            "expected_delivery_date": "2026-06-03T00:00:00"
+          }
+        ]
+      },
+      "latency_ms": 9970
+    },
+    {
+      "step": 7,
+      "tool": "search_kb",
+      "input": {
+        "query": "وين طلبي رقم ORD-1001؟ ما وصلني لحد الحين"
+      },
+      "output": {
+        "results": [
+          {
+            "id": "return_003",
+            "score": 0.18680008866925746
+          },
+          {
+            "id": "ship_002",
+            "score": 0.18118321481304933
+          },
+          {
+            "id": "acct_001",
+            "score": 0.12119544868079184
+          }
+        ]
+      },
+      "latency_ms": 9970
+    },
+    {
+      "step": 8,
+      "tool": "assess_urgency",
+      "input": {
+        "sentiment": "neutral",
+        "intent": "order_status"
+      },
+      "output": {
+        "urgency": "low"
+      },
+      "latency_ms": 0
+    },
+    {
+      "step": 9,
+      "tool": "route_team",
+      "input": {
+        "intent": "order_status",
+        "urgency": "low"
+      },
+      "output": {
+        "team": "logistics",
+        "requires_human": false
+      },
+      "latency_ms": 0
+    },
+    {
+      "step": 10,
+      "tool": "draft_response",
+      "input": {
+        "intent": "order_status",
+        "dialect": "msa"
+      },
+      "output": {
+        "draft_response_ar": "نأسف على الإزعاج، يمكنك تتبع طلبك برقم ORD-1001 عبر رقم التتبع المرسل إلى بريدك الإلكتروني أو من خلال صفحة \"طلباتي\" في التطبيق. ننصحك بالتحقق من البريد الإلكتروني للحصول على تفاصيل الشحنة. إذا كانت لديك أي استفسارات إضافية، لا تتردد في التواصل معنا."
+      },
+      "latency_ms": 5372
+    }
+  ],
+  "result": {
+    "intent": "order_status",
+    "intent_confidence": 0.95,
+    "urgency": "low",
+    "sentiment": "neutral",
+    "dialect": "msa",
+    "entities": {
+      "order_ids": [
+        "ORD-1001"
+      ],
+      "phone_numbers": [],
+      "emails": []
+    },
+    "requires_human": false,
+    "routed_team": "logistics",
+    "draft_response_ar": "نأسف على الإزعاج، يمكنك تتبع طلبك برقم ORD-1001 عبر رقم التتبع المرسل إلى بريدك الإلكتروني أو من خلال صفحة \"طلباتي\" في التطبيق. ننصحك بالتحقق من البريد الإلكتروني للحصول على تفاصيل الشحنة. إذا كانت لديك أي استفسارات إضافية، لا تتردد في التواصل معنا.",
+    "tools_used": [
+      "sanitizer",
+      "detect_dialect",
+      "extract_entities",
+      "analyze_sentiment",
+      "classify_intent",
+      "lookup_order",
+      "search_kb",
+      "assess_urgency",
+      "route_team",
+      "draft_response"
+    ],
+    "latency_ms": 15343,
+    "est_cost_usd": 0.00019074
+  },
+  "gold": {
+    "expected_intent": "order_status",
+    "expected_team": "logistics",
+    "expected_dialect": "msa"
+  }
+}

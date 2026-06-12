@@ -14,6 +14,8 @@ logger = logging.getLogger(__name__)
 # Approximate USD price per 1K tokens (prompt, completion) for cost estimation.
 _PRICE_TABLE: dict[str, tuple[float, float]] = {
     "qwen/qwen-2.5-72b-instruct": (0.00035, 0.0004),
+    "qwen/qwen3-14b": (0.00006, 0.00024),
+    "qwen/qwen3-14b:free": (0.0, 0.0),
     "deepseek/deepseek-chat": (0.00014, 0.00028),
     "meta-llama/llama-3.1-70b-instruct": (0.0004, 0.0004),
 }
@@ -53,6 +55,18 @@ class OpenRouterClient:
         self.total_prompt_tokens = 0
         self.total_completion_tokens = 0
         self.total_cost_usd = 0.0
+
+        self._client = httpx.Client(timeout=self.timeout)
+
+    def close(self) -> None:
+        """Close the underlying HTTP connection pool."""
+        self._client.close()
+
+    def __enter__(self) -> "OpenRouterClient":
+        return self
+
+    def __exit__(self, *exc_info: object) -> None:
+        self.close()
 
     def _headers(self) -> dict[str, str]:
         """Build the HTTP headers required by OpenRouter."""
@@ -122,12 +136,11 @@ class OpenRouterClient:
         last_error: Exception | None = None
         for attempt in range(1, self.max_retries + 1):
             try:
-                with httpx.Client(timeout=self.timeout) as client:
-                    response = client.post(
-                        f"{self.base_url}/chat/completions",
-                        headers=self._headers(),
-                        content=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
-                    )
+                response = self._client.post(
+                    f"{self.base_url}/chat/completions",
+                    headers=self._headers(),
+                    content=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
+                )
                 response.raise_for_status()
                 data: dict[str, Any] = response.json()
 
@@ -176,9 +189,24 @@ class OpenRouterClient:
             text = text.strip("`")
             if text.startswith("json"):
                 text = text[4:]
+            text = text.strip()
+
         try:
             parsed = json.loads(text)
             return parsed if isinstance(parsed, dict) else {}
         except json.JSONDecodeError:
-            logger.warning("Failed to parse JSON from LLM response: %s", text[:200])
-            return {}
+            pass
+
+        # The model sometimes prefixes/suffixes the JSON object with stray
+        # text (e.g. a leftover sentence fragment), so fall back to the
+        # outermost {...} substring.
+        start, end = text.find("{"), text.rfind("}")
+        if start != -1 and end != -1 and end > start:
+            try:
+                parsed = json.loads(text[start : end + 1])
+                return parsed if isinstance(parsed, dict) else {}
+            except json.JSONDecodeError:
+                pass
+
+        logger.warning("Failed to parse JSON from LLM response: %s", text[:200])
+        return {}
