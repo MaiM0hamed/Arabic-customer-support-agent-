@@ -13,7 +13,7 @@ from config import settings
 logger = logging.getLogger(__name__)
 
 
-def require_api_key(x_api_key: str | None = Header(default=None)) -> None:
+def require_api_key(x_api_key: str | None = Header(default=None, include_in_schema=False)) -> None:
     """Validate the `X-API-Key` header against the configured API key.
 
     If `settings.api_key` is empty, authentication is disabled (useful for
