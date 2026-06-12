@@ -61,11 +61,15 @@ def _keyword_fallback(text: str) -> tuple[str, float]:
     return best_intent, confidence
 
 
-def classify_intent(text: str, llm_client: OpenRouterClient | None = None) -> tuple[str, float]:
+def classify_intent(
+    text: str, llm_client: OpenRouterClient | None = None
+) -> tuple[str, float, list[str]]:
     """Classify the intent of a customer message.
 
-    Attempts an LLM-based classification first, falling back to keyword
-    matching if the LLM call fails or returns an invalid result.
+    Uses a two-stage prompt: the LLM first lists every distinct issue
+    mentioned in the message, then picks the primary (most actionable) one
+    for routing. Falls back to keyword matching if the LLM call fails or
+    returns an invalid result.
 
     Args:
         text: Sanitized customer message text.
@@ -73,11 +77,13 @@ def classify_intent(text: str, llm_client: OpenRouterClient | None = None) -> tu
             the keyword fallback is used.
 
     Returns:
-        tuple[str, float]: The classified intent id (guaranteed to be a
-            valid taxonomy id) and a confidence score in `[0, 1]`.
+        tuple[str, float, list[str]]: The classified primary intent id
+            (guaranteed to be a valid taxonomy id), a confidence score in
+            `[0, 1]`, and the list of all issue intent ids the LLM
+            identified (empty for the keyword fallback unless it matches).
     """
     if not text:
-        return _DEFAULT_INTENT, 0.0
+        return _DEFAULT_INTENT, 0.0, []
 
     if llm_client is not None:
         try:
@@ -95,11 +101,13 @@ def classify_intent(text: str, llm_client: OpenRouterClient | None = None) -> tu
             result = llm_client.extract_json(response)
             intent = result.get("intent")
             confidence = float(result.get("confidence", 0.0))
+            issues = [i for i in result.get("issues", []) if i in _VALID_INTENT_IDS]
 
             if intent in _VALID_INTENT_IDS:
-                return intent, max(0.0, min(confidence, 1.0))
+                return intent, max(0.0, min(confidence, 1.0)), issues
             logger.info("LLM returned invalid intent '%s', falling back to keywords.", intent)
         except (OpenRouterError, ValueError, KeyError, OSError) as exc:
             logger.warning("LLM intent classification failed: %s", exc)
 
-    return _keyword_fallback(text)
+    intent, confidence = _keyword_fallback(text)
+    return intent, confidence, [intent]

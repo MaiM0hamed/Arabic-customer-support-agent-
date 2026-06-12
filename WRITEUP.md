@@ -120,15 +120,15 @@ adversarial cases. Full results in `logs/evaluations/evaluation_report.json`.
 
 | Metric | Value |
 |---|---|
-| Intent precision | 0.727 |
-| Intent recall | 0.524 |
-| Intent F1 | 0.520 |
-| Intent accuracy | 0.479 |
-| Routing accuracy | 0.440 |
+| Intent precision | 0.700 |
+| Intent recall | 0.573 |
+| Intent F1 | **0.554** (up from 0.520) |
+| Intent accuracy | **0.549** (up from 0.479) |
+| Routing accuracy | **0.480** (up from 0.440) |
 | Dialect accuracy | **0.944** (67/71, up from 0.761 pre-fix) |
-| Avg latency / message | 17.5s |
-| Avg cost / message (`qwen/qwen3-14b`, paid) | $0.000244 |
-| Total cost (89 cases: 71 gold + 18 adversarial) | $0.0173 |
+| Avg latency / message | 27.5s (up from 17.5s) |
+| Avg cost / message (`qwen/qwen3-14b`, paid) | $0.000281 (up from $0.000244) |
+| Total cost (89 cases: 71 gold + 18 adversarial) | $0.0200 |
 | Adversarial cases run | 18/18 (qualitative review) |
 
 **LLM-as-judge scores** (1-5, `llm/prompts/judge_prompt.txt`, averaged over
@@ -136,29 +136,43 @@ all 71 gold cases):
 
 | Rubric field | Avg score |
 |---|---|
-| `dialect_match` | 4.87 |
-| `correctness` | 4.68 |
-| `tone` | 5.00 |
-| `helpfulness` | 3.97 |
+| `dialect_match` | 4.77 |
+| `correctness` | 4.66 |
+| `tone` | 4.89 |
+| `helpfulness` | 3.92 |
 
-`dialect_match` (4.87/5) and `tone` (5.00/5) confirm the dialect-register fix
-(§3) is working well in practice. `helpfulness` (3.97/5) is the lowest score
-and tracks the intent-classification gap below — a response can be polite
-and dialect-appropriate while still addressing the wrong underlying issue.
+`dialect_match` (4.77/5) and `tone` (4.89/5) confirm the dialect-register fix
+(§3) is still working well in practice (slightly lower than the previous run,
+within run-to-run noise of a temperature-0 but non-deterministic API).
+`helpfulness` (3.92/5) is still the lowest score and tracks the remaining
+intent-classification gap below — a response can be polite and
+dialect-appropriate while still addressing the wrong underlying issue.
 
 **Failure breakdown** (`logs/evaluations/error_analysis.json`,
-`evaluation.error_analysis.build_error_summary`):
-- 37/71 intent errors, 40/71 team-routing errors, **4/71 dialect errors**
-  (down from 17/71 pre-fix).
-- Dominant intent confusion: `payment_issue -> complaint` (7),
-  `damaged_product -> complaint` (7), `shipping_delay -> complaint` (6),
-  `app_bug -> complaint` (5), `refund_request -> complaint` (3) — i.e. the
-  classifier collapses specific issue types into the generic `complaint`
-  bucket on long, multi-grievance messages (see §3, and the failure
-  trajectory in `docs/annotated_trajectories.md`).
+`evaluation.error_analysis.build_error_summary`), **after** adding two-stage
+intent classification (§3, §7 item 1 — model first lists all issues
+mentioned, then picks the primary one):
+- **32/71 intent errors** (down from 37), **37/71 team-routing errors** (down
+  from 40), **4/71 dialect errors** (unchanged).
+- Dominant intent confusion is still `X -> complaint`, but smaller:
+  `damaged_product -> complaint` (6, was 7), `shipping_delay -> complaint`
+  (6, unchanged), `payment_issue -> complaint` (5, was 7),
+  `app_bug -> complaint` (3, was 5). The `X -> complaint` total dropped from
+  28/71 to 20/71.
+- New, smaller confusion pairs appeared (`complaint -> general_inquiry` (2),
+  `refund_request -> contact_support_request` (1), etc.) — the two-stage
+  prompt sometimes now picks a *different* wrong specific intent instead of
+  defaulting to `complaint`, which is a smaller error but not a free win.
 - Remaining dialect confusion: `msa -> egyptian` (2), `gulf -> msa` (1),
-  `gulf -> egyptian` (1) — much smaller and harder-to-reduce residual
-  (mostly short/ambiguous messages with no strong dialect markers).
+  `gulf -> egyptian` (1) — unchanged, much smaller and harder-to-reduce
+  residual (mostly short/ambiguous messages with no strong dialect markers).
+- **Cost of the fix**: average latency rose from 17.5s to 27.5s per message
+  (the classify_intent prompt is now longer and asks for more structured
+  output), and average cost rose from $0.000244 to $0.000281. This is a
+  meaningful latency tradeoff for a ~7-point gain in intent accuracy and
+  4-point gain in routing accuracy — worth it for a triage system where
+  correctness matters more than sub-second latency, but would need
+  monitoring in production.
 
 **LLM-as-judge justification**: `dialect_match` directly measures the
 register-matching problem called out in the brief; `correctness`/
@@ -171,31 +185,38 @@ into the repo (`llm/prompts/judge_prompt.txt`) and enabled by default in
 
 ## 6. Biggest remaining gap
 
-**Intent classification on long, multi-topic messages** (§3, §5): ~half of
-intent errors are `X -> complaint` collapses on HARD-dataset hotel reviews
-that describe multiple grievances. The gold test set itself mixes "true"
-e-commerce intents (order status, refunds — clean, short messages) with
-hotel-review-derived cases that don't map naturally onto the SoukAI intent
-taxonomy. Routing accuracy (0.437) is depressed by the same effect, since
-team routing is a function of intent + urgency.
+**Intent classification on long, multi-topic messages** (§3, §5): even after
+the two-stage intent fix (§7 item 1), `X -> complaint` collapses on
+HARD-dataset hotel reviews remain the single largest error category
+(20/71, down from 28/71). The gold test set itself mixes "true" e-commerce
+intents (order status, refunds — clean, short messages) with hotel-review-
+derived cases that don't map naturally onto the SoukAI intent taxonomy.
+Routing accuracy (0.480) is depressed by the same effect, since team routing
+is a function of intent + urgency.
 
 ## 7. What I'd build in another week
 
-1. **Two-stage intent classification for long messages**: first ask the LLM
-   to list *all* grievances mentioned, then pick the single most actionable
-   one for routing — should reduce the `-> complaint` collapse that accounts
-   for ~30 of the 37 intent errors.
+1. ~~**Two-stage intent classification for long messages**~~ — **done**: the
+   LLM now first lists *all* grievances mentioned (`issues` array), then
+   picks the single most actionable one for routing
+   (`llm/prompts/classify_intent.txt`, `agent/tools/classify_intent.py`).
+   Reduced `X -> complaint` confusions from 28/71 to 20/71, raising intent
+   accuracy 0.479 → 0.549 and routing accuracy 0.440 → 0.480, at the cost of
+   +10s avg latency per message (§5). Next step: cache/parallelize the extra
+   reasoning, or use the `issues` list directly for multi-team routing
+   instead of a single primary intent.
 2. **Curate the gold set**: replace or re-label the HARD-derived hotel-review
    cases whose "true" e-commerce intent is ambiguous, so the test set
    measures the triage behavior SoukAI actually needs.
 3. **Sentiment**: replace/augment the lexicon with a small LLM call for
    long messages, since lexicon scoring is unreliable on mixed-sentiment text.
 4. **`helpfulness` follow-up**: drill into the judge's lowest-scoring
-   dimension (3.97/5) on a per-intent basis to see whether it's driven
-   entirely by the `-> complaint` misroutes or by other gaps too.
+   dimension (3.92/5) on a per-intent basis to see whether it's driven
+   entirely by the remaining `-> complaint` misroutes or by other gaps too.
 5. **Cost/latency dashboard**: aggregate `avg_cost_usd`/`avg_latency_ms`
    (now tracked per-case in `evaluation_report.json`) across runs over time
-   to catch regressions.
+   to catch regressions — especially relevant now that the two-stage prompt
+   nearly doubled avg latency.
 
 ## 8. Design decisions retained from the initial implementation
 

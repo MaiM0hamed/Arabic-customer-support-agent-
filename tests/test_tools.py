@@ -65,16 +65,18 @@ def test_normalize_urgency_invalid_defaults_to_low() -> None:
 
 def test_classify_intent_keyword_fallback_order_status() -> None:
     """Without an LLM client, keyword matching should classify order status."""
-    intent, confidence = classify_intent("وين طلبي ORD-1001 رقم التتبع؟", llm_client=None)
+    intent, confidence, issues = classify_intent("وين طلبي ORD-1001 رقم التتبع؟", llm_client=None)
     assert intent == "order_status"
     assert 0.0 < confidence <= 1.0
+    assert issues == [intent]
 
 
 def test_classify_intent_empty_text() -> None:
     """Empty text returns the default intent with zero confidence."""
-    intent, confidence = classify_intent("", llm_client=None)
+    intent, confidence, issues = classify_intent("", llm_client=None)
     assert intent == "general_inquiry"
     assert confidence == 0.0
+    assert issues == []
 
 
 def test_route_team_maps_intent_to_team() -> None:
