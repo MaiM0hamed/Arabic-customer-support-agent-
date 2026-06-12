@@ -80,7 +80,6 @@ Endpoints:
 
 - `POST /triage` — run the full triage pipeline on a customer message
 - `GET /health` — health check (no auth required)
-- `GET /triage/{run_id}` — fetch a persisted triage run
 - `GET /runs` — list recent triage runs
 
 Cases that `requires_human` are also persisted to the `escalations` table for

@@ -1,7 +1,6 @@
 """API route definitions for the Arabic customer support agent."""
 
 import logging
-from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException
 
@@ -9,7 +8,7 @@ from agent.models import Entities, HealthResponse, ReasoningStep, TriageRequest,
 from agent.orchestrator import TriageOrchestrator
 from api.security import require_api_key
 from database.models import TriageRun
-from observability.db_logger import fetch_triage_run, list_triage_runs, persist_escalation, persist_triage_run
+from observability.db_logger import list_triage_runs, persist_escalation, persist_triage_run
 from observability.logger import write_trajectory
 
 logger = logging.getLogger(__name__)
@@ -106,26 +105,6 @@ def triage(request: TriageRequest) -> TriageResponse:
         raise HTTPException(status_code=500, detail="Triage pipeline failed.") from exc
     finally:
         orchestrator.llm_client.close()
-
-
-@router.get("/triage/{run_id}", response_model=TriageRunRecord, dependencies=[Depends(require_api_key)])
-def get_triage_run(run_id: UUID) -> TriageRunRecord:
-    """Fetch a single triage run by its identifier.
-
-    Args:
-        run_id: The unique identifier of the triage run.
-
-    Returns:
-        TriageRunRecord: The persisted triage run.
-
-    Raises:
-        HTTPException: With status code 404 if the run does not exist.
-    """
-    run = fetch_triage_run(run_id)
-    if run is None:
-        raise HTTPException(status_code=404, detail="Triage run not found.")
-
-    return _to_record(run)
 
 
 @router.get("/runs", response_model=list[TriageRunRecord], dependencies=[Depends(require_api_key)])
