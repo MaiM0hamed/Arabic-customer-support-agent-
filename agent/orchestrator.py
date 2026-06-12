@@ -110,7 +110,7 @@ class TriageOrchestrator:
             lookup_future = executor.submit(lookup_orders, entities_raw["order_ids"])
             search_future = executor.submit(search_kb, clean_message, top_k=3)
 
-            intent, intent_confidence = classify_future.result()
+            intent, intent_confidence, issues = classify_future.result()
             orders_data = lookup_future.result()
             kb_results = search_future.result()
 
@@ -118,7 +118,7 @@ class TriageOrchestrator:
             5,
             "classify_intent",
             {"text": clean_message},
-            {"intent": intent, "confidence": intent_confidence},
+            {"intent": intent, "confidence": intent_confidence, "issues": issues},
             classify_start,
         )
         record(
