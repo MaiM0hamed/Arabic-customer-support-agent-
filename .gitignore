@@ -218,3 +218,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Per-run agent trajectory logs (regenerated on each run, evaluation
+# summaries under logs/evaluations/ are kept as evidence)
+logs/trajectories/*.jsonl

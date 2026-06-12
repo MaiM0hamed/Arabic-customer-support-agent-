@@ -3,6 +3,7 @@
 import logging
 import time
 import uuid
+from concurrent.futures import ThreadPoolExecutor
 from typing import Any
 
 from agent.models import Entities, ReasoningStep, TriageResponse
@@ -17,7 +18,7 @@ from agent.tools import (
     classify_intent,
     draft_response,
     escalate_to_human,
-    lookup_order,
+    lookup_orders,
     route_team,
     search_kb,
 )
@@ -43,8 +44,9 @@ class TriageOrchestrator:
         """Execute the full triage pipeline for a customer message.
 
         Pipeline: sanitizer -> dialect detection -> entity extraction ->
-        sentiment -> classify intent -> lookup order -> search kb ->
-        urgency -> route team -> draft response -> optional escalation.
+        sentiment -> (classify intent / lookup orders / search kb in
+        parallel) -> urgency -> route team -> draft response -> optional
+        escalation.
 
         Args:
             message: Raw customer message text.
@@ -98,39 +100,40 @@ class TriageOrchestrator:
             step_start,
         )
 
-        # 5. Classify intent
-        step_start = time.perf_counter()
-        intent, intent_confidence = classify_intent(clean_message, llm_client=self.llm_client)
+        # 5-7. Classify intent, look up orders, and search the knowledge base
+        # in parallel -- these three steps are independent of one another.
+        classify_start = time.perf_counter()
+        lookup_start = time.perf_counter()
+        search_start = time.perf_counter()
+        with ThreadPoolExecutor(max_workers=3) as executor:
+            classify_future = executor.submit(classify_intent, clean_message, llm_client=self.llm_client)
+            lookup_future = executor.submit(lookup_orders, entities_raw["order_ids"])
+            search_future = executor.submit(search_kb, clean_message, top_k=3)
+
+            intent, intent_confidence = classify_future.result()
+            orders_data = lookup_future.result()
+            kb_results = search_future.result()
+
         record(
             5,
             "classify_intent",
             {"text": clean_message},
             {"intent": intent, "confidence": intent_confidence},
-            step_start,
+            classify_start,
         )
-
-        # 6. Lookup order (if an order id was found)
-        step_start = time.perf_counter()
-        order_data = None
-        if entities_raw["order_ids"]:
-            order_data = lookup_order(entities_raw["order_ids"][0])
         record(
             6,
             "lookup_order",
             {"order_ids": entities_raw["order_ids"]},
-            {"order": order_data},
-            step_start,
+            {"orders": orders_data},
+            lookup_start,
         )
-
-        # 7. Search knowledge base
-        step_start = time.perf_counter()
-        kb_results = search_kb(clean_message, top_k=3)
         record(
             7,
             "search_kb",
             {"query": clean_message},
             {"results": [{"id": doc.get("id"), "score": doc.get("score")} for doc in kb_results]},
-            step_start,
+            search_start,
         )
 
         # 8. Assess urgency

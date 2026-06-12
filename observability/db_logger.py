@@ -1,4 +1,4 @@
-"""Persists triage runs to the PostgreSQL `triage_runs` table."""
+"""Persists triage runs and escalations to PostgreSQL."""
 
 import logging
 from uuid import UUID
@@ -6,7 +6,7 @@ from uuid import UUID
 from sqlalchemy.exc import SQLAlchemyError
 
 from agent.models import TriageResponse
-from database.models import TriageRun
+from database.models import Escalation, TriageRun
 from database.postgres import get_session
 
 logger = logging.getLogger(__name__)
@@ -63,6 +63,36 @@ def fetch_triage_run(run_id: UUID) -> TriageRun | None:
     except SQLAlchemyError as exc:
         logger.error("Failed to fetch triage run %s: %s", run_id, exc)
         return None
+
+
+def persist_escalation(
+    triage_run_id: UUID, customer_id: str, intent: str, priority: str, reason: str
+) -> None:
+    """Persist an escalation record to the `escalations` table.
+
+    Args:
+        triage_run_id: Identifier of the triage run that triggered the escalation.
+        customer_id: Identifier of the customer associated with the case.
+        intent: Classified intent identifier for the case.
+        priority: Escalation priority (`low`, `medium`, `high`, `critical`).
+        reason: Free-text explanation of why escalation is required.
+
+    Raises:
+        SQLAlchemyError: Never raised; database errors are caught and logged.
+    """
+    try:
+        with get_session() as session:
+            session.add(
+                Escalation(
+                    triage_run_id=triage_run_id,
+                    customer_id=customer_id,
+                    intent=intent,
+                    priority=priority,
+                    reason=reason,
+                )
+            )
+    except SQLAlchemyError as exc:
+        logger.error("Failed to persist escalation for run %s: %s", triage_run_id, exc)
 
 
 def list_triage_runs(limit: int = 50, offset: int = 0) -> list[TriageRun]:

@@ -2,12 +2,38 @@
 
 import json
 import logging
+import re
 import sys
 from pathlib import Path
 from typing import Any
 from uuid import UUID
 
 from config import settings
+
+_EMAIL_RE = re.compile(r"\b[\w.+-]+@[\w-]+\.[\w.-]+\b")
+_PHONE_RE = re.compile(r"\b(?:\+?\d{1,3}[\s-]?)?0\d{8,9}\b")
+
+
+def _mask_pii(value: Any) -> Any:
+    """Recursively mask emails and phone numbers in strings, dicts, and lists.
+
+    Args:
+        value: The value to mask. Strings have emails/phone numbers replaced
+            with `***`; dicts and lists are processed recursively; all other
+            types are returned unchanged.
+
+    Returns:
+        Any: The value with any PII masked.
+    """
+    if isinstance(value, str):
+        masked = _EMAIL_RE.sub("***@***", value)
+        masked = _PHONE_RE.sub("***", masked)
+        return masked
+    if isinstance(value, dict):
+        return {key: _mask_pii(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [_mask_pii(item) for item in value]
+    return value
 
 
 class JsonFormatter(logging.Formatter):
@@ -26,7 +52,7 @@ class JsonFormatter(logging.Formatter):
             "timestamp": self.formatTime(record, "%Y-%m-%dT%H:%M:%S"),
             "level": record.levelname,
             "logger": record.name,
-            "message": record.getMessage(),
+            "message": _mask_pii(record.getMessage()),
         }
         if record.exc_info:
             payload["exc_info"] = self.formatException(record.exc_info)
@@ -66,7 +92,8 @@ def write_trajectory(run_id: UUID, trajectory: dict[str, Any]) -> None:
     try:
         trajectories_dir.mkdir(parents=True, exist_ok=True)
         file_path = trajectories_dir / f"{run_id}.jsonl"
+        masked_trajectory = _mask_pii(trajectory)
         with open(file_path, "a", encoding="utf-8") as handle:
-            handle.write(json.dumps(trajectory, ensure_ascii=False, default=str) + "\n")
+            handle.write(json.dumps(masked_trajectory, ensure_ascii=False, default=str) + "\n")
     except OSError as exc:
         logger.error("Failed to write trajectory for run %s: %s", run_id, exc)
