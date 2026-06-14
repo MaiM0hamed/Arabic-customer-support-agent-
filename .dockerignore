@@ -4,4 +4,3 @@ __pycache__
 *.pyc
 logs
 .pytest_cache
-.claude

@@ -1,13 +1,5 @@
 # Write-up: Arabic E-commerce Customer Support Triage Agent
 
-> **AI assistant disclosure**: this project (initial implementation, bug
-> fixes, evaluation tooling, and this write-up) was built with the help of
-> **Claude Code**. Design decisions, the evaluation methodology, the choice
-> of fixes after reviewing the error analysis, and the final judgment on
-> what to ship vs. defer were made by me; Claude Code was used to write and
-> edit code, run tests/evaluations, and draft this document, which I then
-> reviewed.
-
 ## 1. Framework choice and why
 
 The orchestrator (`agent/orchestrator.py`) is a **plain Python class
